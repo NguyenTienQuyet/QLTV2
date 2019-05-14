@@ -53,7 +53,7 @@ jQuery(function($) {
 					var user_id = $(this).attr('user_id');
 					// alert(id);
 
-					Alert_id_returnbook();
+					Alert_id_returnbooka();
 					
 
 					$('#return-history').modal('show');
@@ -65,7 +65,7 @@ jQuery(function($) {
 					var user_id = $(this).attr('user_id');
 					// alert(id);
 
-					Alert_id_returnbook();
+					Alert_id_returnbookb();
 					
 
 					$('#active-history').modal('show');
@@ -151,7 +151,7 @@ jQuery(function($) {
 								var user_id = $(this).attr('user_id');
 								// alert(id);
 
-								Alert_id_returnbook();
+								Alert_id_returnbooka();
 								
 
 								$('#return-history').modal('show');
@@ -163,7 +163,7 @@ jQuery(function($) {
 								var user_id = $(this).attr('user_id');
 								// alert(id);
 
-								Alert_id_returnbook();
+								Alert_id_returnbookb();
 
 								$('#active-history').modal('show');
 							});
@@ -180,7 +180,7 @@ jQuery(function($) {
 			}
 		});
 	});
-	function Alert_id_returnbook() {
+	function Alert_id_returnbookb() {
 		$.ajax({
 		url:'/api/v1/bookCopies/get?id='+id+'&relations[]=book',
 		type: 'get',
@@ -199,10 +199,36 @@ jQuery(function($) {
 			$('#active_bookCopy_id').val(id);
 			// }
 
-		},
-		error: function(err){
-			alert('fail');
-		}
-	});
+		    },
+		    error: function(err){
+			    alert('fail');
+		    }
+	    });
+	}
+	function Alert_id_returnbooka() {
+		$.ajax({
+			url:'/api/v1/bookCopies/get?id='+id+'&relations[]=book',
+			type: 'get',
+			dataType: 'json',
+			success: function(dataa){
+				// console.log(dataa);
+				// for(var i in dataa){
+				// alert(dataa.book.title);
+				$('#return_book_copy_id').text(dataa.id);
+				$('#return_book_id').text(dataa.book_id);
+				$('#return_book_title').text(dataa.book.title);
+				$('#return_book_state_detail').text(dataa.state_detail);
+
+				$('#return_user_id').val(user_id);
+				$('#return_bookCopy_id').val(id);
+				// }
+
+			},
+			error: function(err){
+				alert('fail');
+			}
+		});
+
+
 	}
 });
